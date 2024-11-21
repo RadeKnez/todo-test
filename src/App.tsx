@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { Layout, Container, TaskCard } from "./components";
 import { useTaskStore } from "./hooks/useTaskStore";
+import { CreateTaskCard } from "./components/CreateTaskCard";
 
 function App() {
   const { tasks } = useTaskStore();
@@ -9,6 +10,7 @@ function App() {
   return (
     <Layout>
       <Container>
+        <CreateTaskCard />
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

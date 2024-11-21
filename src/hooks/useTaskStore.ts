@@ -4,7 +4,9 @@ import { Task } from "../models";
 
 type TaskStore = {
   tasks: Task[];
-  create: () => void;
+  create: (title: string) => void;
+  remove: (id: string) => void;
+  toggle: (id: string) => void;
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({
@@ -29,13 +31,22 @@ export const useTaskStore = create<TaskStore>((set) => ({
       title: "Task 3",
     },
   ],
-  create: () => {
+  create: (title) => {
     const newTask = {
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
       completed: false,
+      title: title,
     };
 
     set((state) => ({ tasks: [...state.tasks, newTask] }));
   },
+  remove: (id: string) =>
+    set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
+  toggle: (id: string) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      ),
+    })),
 }));
