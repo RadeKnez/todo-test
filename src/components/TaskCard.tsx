@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "../models";
 import { useTaskStore } from "../hooks/useTaskStore";
+import { EditableTextInput } from "./EditableTextInput/EditableTextInput";
 
 type Props = {
   task: Task;
 };
 
 export const TaskCard = ({ task }: Props) => {
-  const { toggle, remove } = useTaskStore();
+  const [isEditing, setIsEditing] = useState(false);
+  const { toggle, remove, rename } = useTaskStore();
 
   return (
     <label className="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
@@ -21,11 +23,12 @@ export const TaskCard = ({ task }: Props) => {
         />
       </div>
       <div>
-        <strong className="font-medium text-gray-900"> {task.title} </strong>
-
-        <p className="mt-1 text-pretty text-sm text-gray-700">
-          {task.description}
-        </p>
+        <EditableTextInput
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          onSave={(value) => rename(task.id, value)}
+          text={task.title || ""}
+        />
       </div>
       <button className="ml-auto" onClick={() => remove(task.id)}>
         <svg

@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Container, TaskCard } from "./components";
 import { useTaskStore } from "./hooks/useTaskStore";
-import { CreateTaskCard } from "./components/CreateTaskCard";
+import { CreateTaskCard } from "./components/CreateTaskCard/CreateTaskCard";
 
 function App() {
   const { tasks } = useTaskStore();

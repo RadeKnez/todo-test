@@ -7,6 +7,7 @@ type TaskStore = {
   create: (title: string) => void;
   remove: (id: string) => void;
   toggle: (id: string) => void;
+  rename: (id: string, name: string) => void;
 };
 
 const STORAGE_KEY = "taskStorage";
@@ -28,7 +29,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
       id: crypto.randomUUID(),
       createdAt: dayjs().toISOString(),
       completed: false,
-      title: title,
+      title: title === "" ? "Untitled task" : title,
     };
 
     set((state) => {
@@ -45,6 +46,16 @@ export const useTaskStore = create<TaskStore>((set) => ({
     set((state) => {
       const updatedTasks = state.tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
+      );
+      storeTasks(updatedTasks);
+      return {
+        tasks: updatedTasks,
+      };
+    }),
+  rename: (id: string, title: string) =>
+    set((state) => {
+      const updatedTasks = state.tasks.map((task) =>
+        task.id === id ? { ...task, title } : task
       );
       storeTasks(updatedTasks);
       return {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTaskStore } from "../hooks/useTaskStore";
+import { useTaskStore } from "../../hooks/useTaskStore";
 
 export const CreateTaskCard = () => {
   const [title, setTitle] = useState<string>("");
@@ -15,7 +15,7 @@ export const CreateTaskCard = () => {
 
   return (
     <label className="flex cursor-pointer justify-between items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
-      <label className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+      <label className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
         <input
           type="text"
           className="peer h-10 border-none pl-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
