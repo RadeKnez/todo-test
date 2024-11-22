@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Task } from "../models";
-import { useTaskStore } from "../hooks/useTaskStore";
-import { EditableTextInput } from "./EditableTextInput/EditableTextInput";
+import { Task } from "../../models";
+import { useTaskStore } from "../../hooks/useTaskStore";
+import { EditableTextInput } from "../EditableTextInput/EditableTextInput";
 
 type Props = {
   task: Task;
@@ -30,7 +30,11 @@ export const TaskCard = ({ task }: Props) => {
           text={task.title || ""}
         />
       </div>
-      <button className="ml-auto" onClick={() => remove(task.id)}>
+      <button
+        className="ml-auto"
+        aria-label="Delete"
+        onClick={() => remove(task.id)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

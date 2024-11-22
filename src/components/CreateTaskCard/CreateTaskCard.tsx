@@ -7,7 +7,13 @@ export const CreateTaskCard = () => {
   const { create } = useTaskStore();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && title !== "") {
+      create(title);
+      setTitle("");
+    }
+  };
+  const handleClick = () => {
+    if (title !== "") {
       create(title);
       setTitle("");
     }
@@ -31,7 +37,7 @@ export const CreateTaskCard = () => {
         </span>
       </label>
 
-      <button className="h-10" onClick={() => create(title)}>
+      <button className="h-10" onClick={handleClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

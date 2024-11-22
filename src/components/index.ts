@@ -1,3 +1,3 @@
 export * from "./Container";
 export * from "./Layout";
-export * from "./TaskCard";
+export * from "./TeskCard/TaskCard";
