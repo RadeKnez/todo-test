@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { Layout, Container, TaskCard } from "./components";
 import { useTaskStore } from "./hooks/useTaskStore";
 import { CreateTaskCard } from "./components/CreateTaskCard";

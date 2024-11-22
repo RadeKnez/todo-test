@@ -9,28 +9,20 @@ type TaskStore = {
   toggle: (id: string) => void;
 };
 
+const STORAGE_KEY = "taskStorage";
+
+const getStoredTasks = (): Task[] => {
+  const storedTasks = localStorage.getItem(STORAGE_KEY);
+
+  return !!storedTasks ? JSON.parse(storedTasks).tasks : [];
+};
+
+const storeTasks = (tasks: Task[]) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks }));
+};
+
 export const useTaskStore = create<TaskStore>((set) => ({
-  tasks: [
-    {
-      id: crypto.randomUUID(),
-      createdAt: dayjs().toISOString(),
-      completed: false,
-      title: "Task 1",
-      description: "Test description",
-    },
-    {
-      id: crypto.randomUUID(),
-      createdAt: dayjs().toISOString(),
-      completed: true,
-      title: "Task 2",
-    },
-    {
-      id: crypto.randomUUID(),
-      createdAt: dayjs().toISOString(),
-      completed: false,
-      title: "Task 3",
-    },
-  ],
+  tasks: getStoredTasks(),
   create: (title) => {
     const newTask = {
       id: crypto.randomUUID(),
@@ -39,14 +31,24 @@ export const useTaskStore = create<TaskStore>((set) => ({
       title: title,
     };
 
-    set((state) => ({ tasks: [...state.tasks, newTask] }));
+    set((state) => {
+      storeTasks([...state.tasks, newTask]);
+      return { tasks: [...state.tasks, newTask] };
+    });
   },
   remove: (id: string) =>
-    set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
+    set((state) => {
+      storeTasks(state.tasks.filter((task) => task.id !== id));
+      return { tasks: state.tasks.filter((task) => task.id !== id) };
+    }),
   toggle: (id: string) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+    set((state) => {
+      const updatedTasks = state.tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
-      ),
-    })),
+      );
+      storeTasks(updatedTasks);
+      return {
+        tasks: updatedTasks,
+      };
+    }),
 }));

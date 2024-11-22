@@ -21,6 +21,7 @@ export const CreateTaskCard = () => {
           className="peer h-10 border-none pl-2 bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
           value={title}
           placeholder=""
+          maxLength={30}
           onChange={(e) => setTitle(e.target.value)}
           onKeyDown={handleKeyDown}
         />
