@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { create } from "zustand";
 import { Task } from "../models";
+import { getStoredTasks, storeTasks } from "../utils";
 
 type TaskStore = {
   tasks: Task[];
@@ -8,18 +9,6 @@ type TaskStore = {
   remove: (id: string) => void;
   toggle: (id: string) => void;
   rename: (id: string, name: string) => void;
-};
-
-const STORAGE_KEY = "taskStorage";
-
-const getStoredTasks = (): Task[] => {
-  const storedTasks = localStorage.getItem(STORAGE_KEY);
-
-  return !!storedTasks ? JSON.parse(storedTasks).tasks : [];
-};
-
-const storeTasks = (tasks: Task[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks }));
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({

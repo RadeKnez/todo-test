@@ -12,7 +12,7 @@ export const TaskCard = ({ task }: Props) => {
   const { toggle, remove, rename } = useTaskStore();
 
   return (
-    <label className="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
+    <label className="flex shadow-md cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
       <div className="flex items-center">
         &#8203;
         <input

@@ -20,7 +20,7 @@ export const CreateTaskCard = () => {
   };
 
   return (
-    <label className="flex cursor-pointer justify-between items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
+    <label className="flex shadow-md cursor-pointer justify-between items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-blue-50">
       <label className="relative w-full block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
         <input
           type="text"
